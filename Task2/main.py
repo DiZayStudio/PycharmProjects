@@ -26,11 +26,15 @@ print(res)
 # Task 3_2
 def print_sqr(n):
     # формируем строку из N символов
-    str = ""
-    for i in n:
-        str += "*"
-    print(str)
-    for k in range(0, n):
-        print("*")
+    s1 = "*" * n
+    s2 = " " * n
+    s_new = "*" + s2[1:n-1] + "*"
 
-print_sqr(int(input("Введите целое число: ")))
+    print(s1)
+    i = 1
+    while i < n - 1:
+        print(s_new)
+        i += 1
+    print(s1)
+
+print_sqr(int(input("Введите целое число больше 1:")))
