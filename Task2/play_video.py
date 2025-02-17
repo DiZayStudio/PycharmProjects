@@ -39,6 +39,10 @@ cap = cv2.VideoCapture(video_path)
 if not cap.isOpened():
     print("Ошибка: Не удалось открыть видео.")
     exit()
+# Сохранение в файл
+result = cv2.VideoWriter('filename.avi',  
+                         cv2.VideoWriter_fourcc(*'MJPG'), 
+                         10, size) 
 
 # Чтение и отображение кадров
 while True:
@@ -48,7 +52,7 @@ while True:
         break  # Выход из цикла, если больше нет кадров
 
     # Рисуем рамку (ДЗ)
-    box = [0.5, 0.5, 0.1, 0.1]  # относительные координаты рамки
+    box = [0.45, 0.45, 0.1, 0.1]  # относительные координаты рамки
     image = annotate(frame, *box)
     # Отображение текущего кадра с помощью OpenCV
     cv2.imshow('Video Playback', image)
@@ -61,3 +65,6 @@ while True:
 
 # Освобождение объекта захвата видео
 cap.release()
+result.release()
+
+cv2.destroyAllWindows()
