@@ -40,7 +40,10 @@ if not cap.isOpened():
     print("Ошибка: Не удалось открыть видео.")
     exit()
 # Сохранение в файл
-result = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc(*'XVID'), 25, (1440, 1080))
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
+size = (frame_width, frame_height)
+result = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc(*'MJPG'), 25, size)
 
 # Чтение и отображение кадров
 while True:
@@ -54,7 +57,7 @@ while True:
     image = annotate(frame, *box)
     # Отображение текущего кадра с помощью OpenCV
     cv2.imshow('Video Playback', image)
-
+    result.write(frame)
     # Ожидание короткий период для управления скоростью воспроизведения
     key = cv2.waitKey(30)  # Настройте это значение для скорости воспроизведения (30 мс ≈ 33 FPS)
 
@@ -66,3 +69,4 @@ cap.release()
 result.release()
 
 cv2.destroyAllWindows()
+print("The video was successfully saved")
